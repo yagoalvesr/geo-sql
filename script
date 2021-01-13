@@ -1,0 +1,32 @@
+create database geo_db;
+
+use geo_db;
+
+create table estado(
+  id int auto_increment primary key, 
+  nome varchar(100) not null, 
+  qtd_populacao long,
+  bandeira_img blob
+  );
+
+create table cidade(
+  id int auto_increment primary key, 
+  nome varchar(100)
+  not null, 
+  qtd_populacao long not null, 
+  id_estado int, 
+  foreign key (id_estado) references ESTADO(id)
+  );
+
+insert into estado values 
+  (1, "Rio Grande do Sul", null, LOAD_FILE('/home/yago/Desktop/bandeiras/Bandeira_do_Rio_Grande_do_Sul.png')), 
+  (2, "Santa Catarina", null, LOAD_FILE('/home/yago/Desktop/bandeiras/Bandeira_de_Santa_Catarina.png')), 
+  (3, “Paraná”, null, LOAD_FILE('/home/yago/Desktop/bandeiras/Bandeira_do_Paraná.png'));
+
+insert into cidade values 
+  (1, "Porto Alegre", 60000, 1),
+  (2, "Caxias do Sul", 50000, 1),
+  (3, "Pelotas", 55000, 1),
+  (4, "Joinville", 40000, 2),
+  (5, "Florianópolis", 40000, 2),
+  (6, "Curitiba", 40000, 3);
